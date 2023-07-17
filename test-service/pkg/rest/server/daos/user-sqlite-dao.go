@@ -17,8 +17,9 @@ func migrateUsers(r *sqls.SQLiteClient) error {
 	CREATE TABLE IF NOT EXISTS users(
 		Id INTEGER PRIMARY KEY AUTOINCREMENT,
         
-		Password TEXT NOT NULL,
 		Username TEXT NOT NULL,
+		Verified INTEGER NOT NULL,
+		Password TEXT NOT NULL,
         CONSTRAINT id_unique_key UNIQUE (Id)
 	)
 	`
@@ -41,8 +42,8 @@ func NewUserDao() (*UserDao, error) {
 }
 
 func (userDao *UserDao) CreateUser(m *models.User) (*models.User, error) {
-	insertQuery := "INSERT INTO users(Password, Username)values(?, ?)"
-	res, err := userDao.sqlClient.DB.Exec(insertQuery, m.Password, m.Username)
+	insertQuery := "INSERT INTO users(Username, Verified, Password)values(?, ?, ?)"
+	res, err := userDao.sqlClient.DB.Exec(insertQuery, m.Username, m.Verified, m.Password)
 	if err != nil {
 		return nil, err
 	}
@@ -72,8 +73,8 @@ func (userDao *UserDao) UpdateUser(id int64, m *models.User) (*models.User, erro
 		return nil, sql.ErrNoRows
 	}
 
-	updateQuery := "UPDATE users SET Password = ?, Username = ? WHERE Id = ?"
-	res, err := userDao.sqlClient.DB.Exec(updateQuery, m.Password, m.Username, id)
+	updateQuery := "UPDATE users SET Username = ?, Verified = ?, Password = ? WHERE Id = ?"
+	res, err := userDao.sqlClient.DB.Exec(updateQuery, m.Username, m.Verified, m.Password, id)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +120,7 @@ func (userDao *UserDao) ListUsers() ([]*models.User, error) {
 	var users []*models.User
 	for rows.Next() {
 		m := models.User{}
-		if err = rows.Scan(&m.Id, &m.Password, &m.Username); err != nil {
+		if err = rows.Scan(&m.Id, &m.Username, &m.Verified, &m.Password); err != nil {
 			return nil, err
 		}
 		users = append(users, &m)
@@ -136,7 +137,7 @@ func (userDao *UserDao) GetUser(id int64) (*models.User, error) {
 	selectQuery := "SELECT * FROM users WHERE Id = ?"
 	row := userDao.sqlClient.DB.QueryRow(selectQuery, id)
 	m := models.User{}
-	if err := row.Scan(&m.Id, &m.Password, &m.Username); err != nil {
+	if err := row.Scan(&m.Id, &m.Username, &m.Verified, &m.Password); err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil, sqls.ErrNotExists
 		}
