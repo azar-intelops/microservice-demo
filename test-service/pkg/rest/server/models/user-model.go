@@ -3,7 +3,9 @@ package models
 type User struct {
 	Id int64 `json:"id,omitempty"`
 
-	Password `json:"password,omitempty"`
+	Password string `json:"password,omitempty"`
 
-	Username `json:"username,omitempty"`
+	Username string `json:"username,omitempty"`
+
+	Verified bool `json:"verified,omitempty"`
 }
