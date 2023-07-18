@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: alpha1
+  name: alpha1
+  labels:
+    app: alpha1
+spec:
+  selector:
+    matchLabels:
+      app: alpha1
+  template:
+    metadata:
+      labels:
+        app: alpha1
+        name: alpha1
+    spec:
+      containers:
+        - name: alpha1
+          image: azar-intelops/microservice-demo/alpha1
+          imagePullPolicy: Always
+        
+          env:
+            - name: SERVICE_NAME
+              value: "go-app"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "localhost:4317"
+            - name: INSECURE_MODE
+              value: "true"
+        
+          ports:
+        
+        
+          - containerPort: 9800
+            name: http
+        
+        
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 30
+        
