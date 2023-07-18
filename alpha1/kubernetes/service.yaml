@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: alpha1
+  labels:
+    app: alpha1
+  name: alpha1
+spec:
+  ports:
+  
+    - protocol: TCP
+      port: 9800
+      targetPort: 9800
+   
+   
+  selector:
+    app: alpha1
+  type: ClusterIP
