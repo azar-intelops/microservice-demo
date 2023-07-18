@@ -35,7 +35,7 @@ func main() {
 	// add prometheus
 	addPrometheus(router)
 
-	userController, err := restcontrollers.NewUserController()
+	usertologinController, err := restcontrollers.NewUserToLoginController()
 	if err != nil {
 		log.Errorf("error occurred: %s", err)
 		return
@@ -44,14 +44,14 @@ func main() {
 	v1 := router.Group("/v1")
 	{
 
-		v1.GET("/users/:id", userController.FetchUser)
-		v1.POST("/users", userController.CreateUser)
-		v1.PUT("/users/:id", userController.UpdateUser)
-		v1.DELETE("/users/:id", userController.DeleteUser)
-		v1.GET("/users", userController.ListUsers)
-		v1.PATCH("/users/:id", userController.PatchUser)
-		v1.HEAD("/users", userController.HeadUser)
-		v1.OPTIONS("/users", userController.OptionsUser)
+		v1.GET("/usertologins/:id", usertologinController.FetchUserToLogin)
+		v1.POST("/usertologins", usertologinController.CreateUserToLogin)
+		v1.PUT("/usertologins/:id", usertologinController.UpdateUserToLogin)
+		v1.DELETE("/usertologins/:id", usertologinController.DeleteUserToLogin)
+		v1.GET("/usertologins", usertologinController.ListUserToLogins)
+		v1.PATCH("/usertologins/:id", usertologinController.PatchUserToLogin)
+		v1.HEAD("/usertologins", usertologinController.HeadUserToLogin)
+		v1.OPTIONS("/usertologins", usertologinController.OptionsUserToLogin)
 
 	}
 
