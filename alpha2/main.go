@@ -55,7 +55,7 @@ func main() {
 
 	}
 
-	Port := ":1000"
+	Port := ":8020"
 	log.Println("Server started")
 	if err = router.Run(Port); err != nil {
 		log.Errorf("error occurred: %s", err)
@@ -93,7 +93,7 @@ func addActuator(router *gin.Engine) {
 	},
 		Env:     "dev",
 		Name:    "alpha2",
-		Port:    1000,
+		Port:    8020,
 		Version: "0.0.1",
 	})
 	ginActuatorHandler := func(ctx *gin.Context) {

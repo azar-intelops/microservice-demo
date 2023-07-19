@@ -6,30 +6,30 @@
 # Post
 curl -X POST -H "Content-Type: application/json" \
 -d '{"Username": "sample string"}' \
-http://localhost:1000/v1/users
+http://localhost:8020/v1/users
 
 # Get
 curl -X GET -H "Content-Type: application/json" \
-http://localhost:1000/v1/users
+http://localhost:8020/v1/users
 
 # Put
 curl -X PUT -H "Content-Type: application/json" \
 -d '{"Id": 123,"Username": "sample string"}' \
-http://localhost:1000/v1/users/123
+http://localhost:8020/v1/users/123
 
 # Put
 ### wrong id passed in param
 curl -X PUT -H "Content-Type: application/json" \
 -d '{"Id": 123,"Username": "sample string"}' \
-http://localhost:1000/v1/users/1234
+http://localhost:8020/v1/users/1234
 
 # Get  (retrieve specific User)
 curl -X GET -H "Content-Type: application/json" \
-http://localhost:1000/v1/users/123
+http://localhost:8020/v1/users/123
 
 # Delete
 curl -X DELETE -H "Content-Type: application/json" \
-http://localhost:1000/v1/users/123
+http://localhost:8020/v1/users/123
 
     
 
