@@ -5,7 +5,7 @@
 # Curl commands for REST Server resource User
 # Post
 curl -X POST -H "Content-Type: application/json" \
--d '{"Username": "sample string","Password": "sample string"}' \
+-d '{"Password": "sample string","Username": "sample string"}' \
 http://localhost:9800/v1/users
 
 # Get
@@ -14,13 +14,13 @@ http://localhost:9800/v1/users
 
 # Put
 curl -X PUT -H "Content-Type: application/json" \
--d '{"Id": 123,"Username": "sample string","Password": "sample string"}' \
+-d '{"Id": 123,"Password": "sample string","Username": "sample string"}' \
 http://localhost:9800/v1/users/123
 
 # Put
 ### wrong id passed in param
 curl -X PUT -H "Content-Type: application/json" \
--d '{"Id": 123,"Username": "sample string","Password": "sample string"}' \
+-d '{"Id": 123,"Password": "sample string","Username": "sample string"}' \
 http://localhost:9800/v1/users/1234
 
 # Get  (retrieve specific User)
