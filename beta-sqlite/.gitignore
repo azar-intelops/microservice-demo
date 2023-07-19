@@ -1,0 +1,4 @@
+beta-sqlite
+../.idea
+.devspace
+/sqlite.db
