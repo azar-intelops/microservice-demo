@@ -42,7 +42,7 @@ deployments:
         service:
           ports:
         
-            - port: 8020
+            - port: 8080
         
         
 
@@ -72,13 +72,13 @@ dev:
     ports:
       - port: "2345:2345"
     
-      - port: "8020:8020"
+      - port: "8080:8080"
     
     
 
     # Open the following URLs once they return an HTTP status code other than 502 or 503
     open:
-      - url: http://localhost:8020
+      - url: http://localhost:8080
 
 # Use the `commands` section to define repeatable dev workflows for this project
 commands:

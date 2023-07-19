@@ -26,7 +26,7 @@ COPY --from=build /app/main /
 
 
 # Application port (optional)
-EXPOSE 8020
+EXPOSE 8080
 
 
 
