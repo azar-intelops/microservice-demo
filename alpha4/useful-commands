@@ -32,6 +32,36 @@ curl -X DELETE -H "Content-Type: application/json" \
 http://localhost:9800/v1/users/123
 
     
+# Curl commands for REST Server resource Col
+# Post
+curl -X POST -H "Content-Type: application/json" \
+-d '{"Password": "sample string","Username": "sample string"}' \
+http://localhost:9800/v1/cols
+
+# Get
+curl -X GET -H "Content-Type: application/json" \
+http://localhost:9800/v1/cols
+
+# Put
+curl -X PUT -H "Content-Type: application/json" \
+-d '{"Id": 123,"Password": "sample string","Username": "sample string"}' \
+http://localhost:9800/v1/cols/123
+
+# Put
+### wrong id passed in param
+curl -X PUT -H "Content-Type: application/json" \
+-d '{"Id": 123,"Password": "sample string","Username": "sample string"}' \
+http://localhost:9800/v1/cols/1234
+
+# Get  (retrieve specific Col)
+curl -X GET -H "Content-Type: application/json" \
+http://localhost:9800/v1/cols/123
+
+# Delete
+curl -X DELETE -H "Content-Type: application/json" \
+http://localhost:9800/v1/cols/123
+
+    
 
 # when mysql throws error about server connection, fire below commands
 # CREATE USER 'root'@'%' IDENTIFIED BY 'password';

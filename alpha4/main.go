@@ -41,6 +41,12 @@ func main() {
 		return
 	}
 
+	colController, err := restcontrollers.NewColController()
+	if err != nil {
+		log.Errorf("error occurred: %s", err)
+		return
+	}
+
 	v1 := router.Group("/v1")
 	{
 
@@ -52,6 +58,15 @@ func main() {
 		v1.PATCH("/users/:id", userController.PatchUser)
 		v1.HEAD("/users", userController.HeadUser)
 		v1.OPTIONS("/users", userController.OptionsUser)
+
+		v1.GET("/cols/:id", colController.FetchCol)
+		v1.POST("/cols", colController.CreateCol)
+		v1.PUT("/cols/:id", colController.UpdateCol)
+		v1.DELETE("/cols/:id", colController.DeleteCol)
+		v1.GET("/cols", colController.ListCols)
+		v1.PATCH("/cols/:id", colController.PatchCol)
+		v1.HEAD("/cols", colController.HeadCol)
+		v1.OPTIONS("/cols", colController.OptionsCol)
 
 	}
 
