@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: alpha2
+  labels:
+    app: alpha2
+  name: alpha2
+spec:
+  ports:
+  
+    - protocol: TCP
+      port: 1000
+      targetPort: 1000
+   
+   
+  selector:
+    app: alpha2
+  type: ClusterIP
