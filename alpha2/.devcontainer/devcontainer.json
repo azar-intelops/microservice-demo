@@ -29,12 +29,12 @@
   },
   "forwardPorts": [
     
-        8020
+        8080
     
   ],
   "portsAttributes": {
     
-        "8020": {
+        "8080": {
           "label": "Hello Remote World",
           "onAutoForward": "notify"
         }
