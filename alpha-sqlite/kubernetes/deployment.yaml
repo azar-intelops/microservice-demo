@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: alpha-sqlite
+  name: alpha-sqlite
+  labels:
+    app: alpha-sqlite
+spec:
+  selector:
+    matchLabels:
+      app: alpha-sqlite
+  template:
+    metadata:
+      labels:
+        app: alpha-sqlite
+        name: alpha-sqlite
+    spec:
+      containers:
+        - name: alpha-sqlite
+          image: azar-intelops/microservice-demo/alpha-sqlite
+          imagePullPolicy: Always
+        
+          env:
+            - name: SERVICE_NAME
+              value: "go-app"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "localhost:4317"
+            - name: INSECURE_MODE
+              value: "true"
+        
+          ports:
+        
+        
+          - containerPort: 9800
+            name: http
+        
+        
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 30
+        
