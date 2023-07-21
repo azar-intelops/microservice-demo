@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: gamma-sqlite
+  name: gamma-sqlite
+  labels:
+    app: gamma-sqlite
+spec:
+  selector:
+    matchLabels:
+      app: gamma-sqlite
+  template:
+    metadata:
+      labels:
+        app: gamma-sqlite
+        name: gamma-sqlite
+    spec:
+      containers:
+        - name: gamma-sqlite
+          image: azar-intelops/microservice-demo/gamma-sqlite
+          imagePullPolicy: Always
+        
+          env:
+            - name: SERVICE_NAME
+              value: "go-app"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "localhost:4317"
+            - name: INSECURE_MODE
+              value: "true"
+        
+          ports:
+        
+        
+          - containerPort: 6000
+            name: http
+        
+        
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 30
+        
