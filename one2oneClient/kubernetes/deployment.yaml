@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: one2oneclient
+  name: one2oneclient
+  labels:
+    app: one2oneclient
+spec:
+  selector:
+    matchLabels:
+      app: one2oneclient
+  template:
+    metadata:
+      labels:
+        app: one2oneclient
+        name: one2oneclient
+    spec:
+      containers:
+        - name: one2oneclient
+          image: azar-intelops/microservice-demo/one2oneclient
+          imagePullPolicy: Always
+        
+          env:
+            - name: SERVICE_NAME
+              value: "go-app"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "localhost:4317"
+            - name: INSECURE_MODE
+              value: "true"
+        
+          ports:
+        
+        
+          - containerPort: 9800
+            name: http
+        
+        
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 30
+        
